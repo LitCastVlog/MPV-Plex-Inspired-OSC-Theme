@@ -25,8 +25,8 @@ local user_opts = {
     hidetimeout = 900,         -- duration in ms until the OSC hides if no
                                 -- mouse movement. enforced non-negative for the
                                 -- user, but internally negative is 'always-on'.
-    fadeduration = 250,         -- duration of fade out in ms, 0 = no fade
-    minmousemove = 4,           -- minimum amount of pixels the mouse has to
+    fadeduration = 200,         -- duration of fade out in ms, 0 = no fade
+    minmousemove = 2,           -- minimum amount of pixels the mouse has to
                                 -- move between ticks to make the OSC show up
     iamaprogrammer = false,     -- use native mpv values and disable OSC
                                 -- internal track list management (and some
@@ -1765,15 +1765,15 @@ function osc_init()
         if (mp.get_property_number('duration', 0) <= 0) then return '--:--:--' end
         if (state.rightTC_trem) then
 		if (state.fulltime) then
-			return ('-'..mp.get_property_osd('playtime-remaining/full'))
-		else
-			return ('-'..mp.get_property_osd('playtime-remaining'))
-		end
-        else
-		if (state.fulltime) then
 			return (mp.get_property_osd('duration/full'))
 		else
 			return (mp.get_property_osd('duration'))
+		end
+        else
+		if (state.fulltime) then
+			return ('-'..mp.get_property_osd('playtime-remaining/full'))
+		else
+			return ('-'..mp.get_property_osd('playtime-remaining'))
 		end
 			
         end
