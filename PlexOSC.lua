@@ -37,7 +37,7 @@ local user_opts = {
     seekrange = true,		-- show seekrange overlay
     seekrangealpha = 64,      	-- transparency of seekranges
     seekbarkeyframes = true,    -- use keyframes when dragging the seekbar
-    showjump = true,            -- show "jump forward/backward 5 seconds" buttons 
+    showjump = false,            -- show "jump forward/backward 5 seconds" buttons 
                                 -- shift+left-click to step 1 frame and 
                                 -- right-click to jump 1 minute
     jumpamount = 5,             -- change the jump amount (in seconds by default)
@@ -47,15 +47,15 @@ local user_opts = {
     title = '${media-title}',   -- string compatible with property-expansion
                                 -- to be shown as OSC title
     showtitle = true,		-- show title in OSC
-    showonpause = true,         -- whether to disable the hide timeout on pause
+    showonpause = false,         -- whether to disable the hide timeout on pause
     timetotal = true,          	-- display total time instead of remaining time?
     timems = false,             -- Display time down to millliseconds by default
     visibility = 'auto',        -- only used at init to set visibility_mode(...)
     windowcontrols = 'auto',    -- whether to show window controls
     greenandgrumpy = false,     -- disable santa hat
     language = 'eng',		-- eng=English, chs=Chinese
-    volumecontrol = true,       -- whether to show mute button and volumne slider
-    keyboardnavigation = false, -- enable directional keyboard navigation
+    volumecontrol = false,       -- whether to show mute button and volumne slider
+    keyboardnavigation = true, -- enable directional keyboard navigation
     chapter_fmt = "Chapter: %s", -- chapter print format for seekbar-hover. "no" to disable
 }
 
@@ -86,7 +86,7 @@ local icons = {
 -- Localization
 local language = {
 	['eng'] = {
-	    welcome = '{\\fs24\\1c&H0&\\1c&HFFFFFF&}Drop files or URLs to play here.',  -- this text appears when mpv starts
+	    welcome = '{\\fs24\\1c&H0&\\1c&HFFFFFF&}Drop files or URLs to play.',  -- this text appears when mpv starts
 		off = 'OFF',
 		na = 'n/a',
 		none = 'none',
@@ -145,8 +145,8 @@ local osc_param = { -- calculated by osc_init()
 
 local osc_styles = {
     TransBg = '{\\blur100\\bord150\\1c&H000000&\\3c&H000000&}',
-    SeekbarBg = '{\\blur0\\bord0\\1c&HFFFFFF&}',
-    SeekbarFg = '{\\blur1\\bord1\\1c&HE39C42&}',
+    SeekbarBg = '{\\blur0\\bord0\\1c&H000000&}',
+    SeekbarFg = '{\\blur1\\bord1\\1c&H09A1E6&}',
     VolumebarBg = '{\\blur0\\bord0\\1c&H999999&}',
     VolumebarFg = '{\\blur1\\bord1\\1c&HFFFFFF&}',
     Ctrl1 = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs36\\fnmaterial-design-iconic-font}',
@@ -158,7 +158,7 @@ local osc_styles = {
     Title = '{\\blur1\\bord0.5\\1c&HFFFFFF&\\3c&H0\\fs38\\q2\\fn' .. user_opts.font .. '}',
     WinCtrl = '{\\blur1\\bord0.5\\1c&HFFFFFF&\\3c&H0\\fs20\\fnmpv-osd-symbols}',
     elementDown = '{\\1c&H999999&}',
-    elementHighlight = '{\\blur1\\bord1\\1c&HFFC033&}',
+    elementHighlight = '{\\blur1\\bord1\\1c&H999999&}', 
 }
 
 -- internal states, do not touch
@@ -235,18 +235,10 @@ function build_keyboard_controls()
 
     -- prepare the main button row
     local bottom_button_line = {}
+	table.insert(bottom_button_line, 'cy_sub')
     table.insert(bottom_button_line, 'cy_audio')
-    table.insert(bottom_button_line, 'cy_sub')
     table.insert(bottom_button_line, 'pl_prev')
-    table.insert(bottom_button_line, 'skipback')
-    if user_opts.showjump then
-        table.insert(bottom_button_line, 'jumpback')
-    end
     table.insert(bottom_button_line, 'playpause')
-    if user_opts.showjump then
-        table.insert(bottom_button_line, 'jumpfrwd')
-    end
-    table.insert(bottom_button_line, 'skipfrwd')
     table.insert(bottom_button_line, 'pl_next')
     table.insert(bottom_button_line, 'tog_info')
     table.insert(bottom_button_line, 'tog_fs')
@@ -1233,75 +1225,34 @@ layouts = function ()
     --
     new_element('seekbarbg', 'box')
     lo = add_layout('seekbarbg')
-    lo.geometry = {x = refX , y = refY - 96 , an = 5, w = osc_geo.w - 50, h = 2}
+    lo.geometry = {x = refX , y = refY - 96 , an = 5, w = osc_geo.w - 50, h = 5}
     lo.layer = 13
     lo.style = osc_styles.SeekbarBg
     lo.alpha[1] = 128
     lo.alpha[3] = 128
 
     lo = add_layout('seekbar')
-    lo.geometry = {x = refX, y = refY - 96 , an = 5, w = osc_geo.w - 50, h = 16}
+    lo.geometry = {x = refX, y = refY - 96 , an = 5, w = osc_geo.w - 50, h = 5}
 	lo.style = osc_styles.SeekbarFg
-    lo.slider.gap = 7
+    lo.slider.gap = 0
     lo.slider.tooltip_style = osc_styles.Tooltip
     lo.slider.tooltip_an = 2
 
     local showjump = user_opts.showjump
     local offset = showjump and 60 or 0
     
-    --
-    -- Volumebar
-    --
-    lo = new_element('volumebarbg', 'box')
-    lo.visible = (osc_param.playresx >= 750) and user_opts.volumecontrol
-    lo = add_layout('volumebarbg')
-    lo.geometry = {x = 155, y = refY - 40, an = 4, w = 80, h = 2}
-    lo.layer = 13
-    lo.style = osc_styles.VolumebarBg
-
-    
-    lo = add_layout('volumebar')
-    lo.geometry = {x = 155, y = refY - 40, an = 4, w = 80, h = 8}
-    lo.style = osc_styles.VolumebarFg
-    lo.slider.gap = 3
-    lo.slider.tooltip_style = osc_styles.Tooltip
-    lo.slider.tooltip_an = 2
 
 	-- buttons
     lo = add_layout('pl_prev')
-    lo.geometry = {x = refX - 120 - offset, y = refY - 40 , an = 5, w = 30, h = 24}
+    lo.geometry = {x = refX - 60, y = refY - 40 , an = 5, w = 30, h = 24}
     lo.style = osc_styles.Ctrl2
-
-	lo = add_layout('skipback')
-    lo.geometry = {x = refX - 60 - offset, y = refY - 40 , an = 5, w = 30, h = 24}
-    lo.style = osc_styles.Ctrl2
-
-
-    if showjump then
-        lo = add_layout('jumpback')
-        lo.geometry = {x = refX - 60, y = refY - 40 , an = 5, w = 30, h = 24}
-        lo.style = osc_styles.Ctrl2
-    end
 			
     lo = add_layout('playpause')
     lo.geometry = {x = refX, y = refY - 40 , an = 5, w = 45, h = 45}
     lo.style = osc_styles.Ctrl1	
 
-    if showjump then
-        lo = add_layout('jumpfrwd')
-        lo.geometry = {x = refX + 60, y = refY - 40 , an = 5, w = 30, h = 24}
-
-        -- HACK: jumpfrwd's icon must be mirrored for nonstandard # of seconds
-        -- as the font only has an icon without a number for rewinding
-        lo.style = (user_opts.jumpiconnumber and jumpicons[user_opts.jumpamount] ~= nil) and osc_styles.Ctrl2 or osc_styles.Ctrl2Flip
-    end
-
-    lo = add_layout('skipfrwd')
-    lo.geometry = {x = refX + 60 + offset, y = refY - 40 , an = 5, w = 30, h = 24}
-    lo.style = osc_styles.Ctrl2	
-
     lo = add_layout('pl_next')
-    lo.geometry = {x = refX + 120 + offset, y = refY - 40 , an = 5, w = 30, h = 24}
+    lo.geometry = {x = refX + 60, y = refY - 40 , an = 5, w = 30, h = 24}
     lo.style = osc_styles.Ctrl2
 
 
@@ -1316,19 +1267,14 @@ layouts = function ()
     lo.style = osc_styles.Time	
 
     lo = add_layout('cy_audio')
-	lo.geometry = {x = 37, y = refY - 40, an = 5, w = 24, h = 24}
+	lo.geometry = {x = 87, y = refY - 40, an = 5, w = 24, h = 24}
     lo.style = osc_styles.Ctrl3
     lo.visible = (osc_param.playresx >= 540)
 	
     lo = add_layout('cy_sub')
-    lo.geometry = {x = 87, y = refY - 40, an = 5, w = 24, h = 24}
+    lo.geometry = {x = 37, y = refY - 40, an = 5, w = 24, h = 24}
     lo.style = osc_styles.Ctrl3
     lo.visible = (osc_param.playresx >= 600)
-
-    lo = add_layout('vol_ctrl')
-    lo.geometry = {x = 137, y = refY - 40, an = 5, w = 24, h = 24}
-    lo.style = osc_styles.Ctrl3
-    lo.visible = (osc_param.playresx >= 650)
 
 	lo = add_layout('tog_fs')
     lo.geometry = {x = osc_geo.w - 37, y = refY - 40, an = 5, w = 24, h = 24}
@@ -1547,7 +1493,7 @@ function osc_init()
     ne.enabled = (#tracks_osc.audio > 0)
     ne.off = (get_track('audio') == 0)
     ne.visible = (osc_param.playresx >= 540)
-    ne.content = icons.audio
+    ne.content = icons.volume
     ne.tooltip_style = osc_styles.Tooltip
     ne.tooltipF = function ()
 		local msg = texts.off
@@ -2514,7 +2460,7 @@ function visibility_mode(mode, no_osd)
     end
 
 	user_opts.visibility = mode
-    utils.shared_script_property_set("osc-visibility", mode)
+    mp.set_property_native("user-data/osc/visibility", mode)
 
     if not no_osd and tonumber(mp.get_property('osd-level')) >= 1 then
         mp.osd_message('OSC visibility: ' .. mode)
