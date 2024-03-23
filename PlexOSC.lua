@@ -1,9 +1,8 @@
--- mpv-osc-modern by maoiscat
--- email:valarmor@163.com
--- https://github.com/maoiscat/mpv-osc-modern
+-- based on mpv-osc-modern by cyl0
+-- https://github.comcyl0/ModernX/
 
--- fork by cyl0
--- https://github.com/cyl0/ModernX/
+-- forked and modifed by LitCast
+-- https://github.com/LitCastVlog/MPV-Plex-Inspired-OSC-Theme
 
 local assdraw = require 'mp.assdraw'
 local msg = require 'mp.msg'
@@ -23,7 +22,7 @@ local user_opts = {
     scalefullscreen = 1.0,      -- scaling of the controller when fullscreen
     scaleforcedwindow = 2.0,    -- scaling when rendered on a forced window
     vidscale = true,            -- scale the controller with the video?
-    hidetimeout = 1500,         -- duration in ms until the OSC hides if no
+    hidetimeout = 900,         -- duration in ms until the OSC hides if no
                                 -- mouse movement. enforced non-negative for the
                                 -- user, but internally negative is 'always-on'.
     fadeduration = 250,         -- duration of fade out in ms, 0 = no fade
@@ -150,8 +149,8 @@ local osc_styles = {
     VolumebarBg = '{\\blur0\\bord0\\1c&H999999&}',
     VolumebarFg = '{\\blur1\\bord1\\1c&HFFFFFF&}',
     Ctrl1 = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs36\\fnmaterial-design-iconic-font}',
-    Ctrl2 = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs24\\fnmaterial-design-iconic-font}',
-    Ctrl2Flip = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs24\\fnmaterial-design-iconic-font\\fry180',
+    Ctrl2 = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs30\\fnmaterial-design-iconic-font}',
+    Ctrl2Flip = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs30\\fnmaterial-design-iconic-font\\fry180',
     Ctrl3 = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&HFFFFFF&\\fs24\\fnmaterial-design-iconic-font}',
     Time = '{\\blur0\\bord0\\1c&HFFFFFF&\\3c&H000000&\\fs17\\fn' .. user_opts.font .. '}',
     Tooltip = '{\\blur1\\bord0.5\\1c&HFFFFFF&\\3c&H000000&\\fs18\\fn' .. user_opts.font .. '}',
