@@ -1,4 +1,4 @@
-# Plex-Inspired theme for MPV
+# Plex HTPC-Inspired theme for MPV
 
 ![img](https://i.ibb.co/SXhRPsc/CEm0-Pvyh-o.png)
 
