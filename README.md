@@ -1,13 +1,12 @@
-# ModernX
-An MPV OSC script based on [mpv-osc-modern](https://github.com/maoiscat/mpv-osc-modern/) that aims to mirror the functionality of MPV's stock OSC while with a more modern-looking interface.
+# Plex-Inspired theme for MPV
 
-![img](https://github.com/cyl0/ModernX/blob/main/preview.png)
+![img](https://images2.imgbox.com/5b/54/CEm0Pvyh_o.png)
 
-# How to install
+# Installation:
 
-Locate your MPV folder. It is typically located at `\%APPDATA%\mpv\` on Windows and `~/.config/mpv/` on Linux/MacOS. See the [Files section](https://mpv.io/manual/master/#files) in mpv's manual for more info.
+Locate your MPV folder. It is typically located at `\%APPDATA%\mpv\` on Windows and `~/.config/mpv/` on Linux/MacOS. 
 
-Put mordenx.lua into your mpv "\~\~/scripts/" folder. Create the "\~\~/scripts/" folder if you don't already have one and remove any other OSC scripts,
+Put PlexOSC.lua into your mpv "\~\~/scripts/" folder. Create the "\~\~/scripts/" folder if you don't already have one and remove any other OSC scripts,
 then put `Material-Design-Iconic-Font.ttf` in the "\~\~/fonts" folder.
 
 in mpv.conf:
