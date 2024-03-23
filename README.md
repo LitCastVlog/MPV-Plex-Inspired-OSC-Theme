@@ -1,6 +1,7 @@
 # Plex HTPC-Inspired theme for MPV
 
 ![img](https://i.ibb.co/SXhRPsc/CEm0-Pvyh-o.png)
+![img](https://images2.imgbox.com/51/4f/ypptKnKC_o.png)
 
 # Installation:
 
