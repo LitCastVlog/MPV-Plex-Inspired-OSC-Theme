@@ -1,6 +1,6 @@
 # Plex-Inspired theme for MPV
 
-![img](https://images2.imgbox.com/5b/54/CEm0Pvyh_o.png)
+![img](https://i.ibb.co/SXhRPsc/CEm0-Pvyh-o.png)
 
 # Installation:
 
