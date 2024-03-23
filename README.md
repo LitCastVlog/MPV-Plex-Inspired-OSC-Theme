@@ -35,13 +35,6 @@ like the built-in script, some buttons may accept multiple mouse actions, here i
 ## Playlist back/forward buttons
 * Left mouse button: play previous/next file.
 * Right mouse button: show playlist.
-## Skip back/forward buttons
-* Left mouse button: go to previous/next chapter.
-* Right mouse button: show chapter list.
-## Jump back/forward buttons
-* Left mouse button: Jumps forwards/backwards by 5 seconds, or by the amount set in `user_opts`.
-* Right mouse button: Jumps forwards/backwards by 1 minute.
-* Shift + Left mouse button: Skips to the previous/next frame.
 ## Cycle audio/subtitle buttons
 * Left mouse button/Right mouse button: cycle to next/previous track.
 * Middle mouse button: show track list.
