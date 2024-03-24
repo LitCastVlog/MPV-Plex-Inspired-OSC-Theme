@@ -9,6 +9,7 @@ By default, keyboard navigation is enabled (like Plex HTPC) to disable it, open 
 
 change `keyboardnavigation = true` to `keyboardnavigation = false`
 
+use `ESC` key to hide OSC (if it doesn't autohide)
 
 # Installation:
 
