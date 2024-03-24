@@ -3,6 +3,13 @@
 ![img](https://i.ibb.co/SXhRPsc/CEm0-Pvyh-o.png)
 ![img](https://images2.imgbox.com/51/4f/ypptKnKC_o.png)
 
+# Importanti Info:
+
+By default, keyboard navigation is enabled (like Plex HTPC) to disable it, open PlexOSC.lua in a text editor, scroll to line 57 and 
+
+change `keyboardnavigation = true` to `keyboardnavigation = false`
+
+
 # Installation:
 
 Locate your MPV folder. It is typically located at `\%APPDATA%\mpv\` on Windows and `~/.config/mpv/` on Linux/MacOS. 
@@ -21,11 +28,6 @@ border = no # Optional, but recommended
 # How to config
 
 edit osc.conf in "\~\~/script-opts/" folder, however many options are changed, so refer to the user_opts variable in the script file for details.
-
-
-By default, keyboard navigation is enabled (like Plex HTPC) to disable it, open PlexOSC.lua in a text editor, scroll to line 57 and 
-
-change `keyboardnavigation = true` to `keyboardnavigation = false`
 
 # Thumbnails
 
