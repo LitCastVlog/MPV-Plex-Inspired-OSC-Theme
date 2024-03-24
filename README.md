@@ -5,11 +5,12 @@
 
 # Important Info:
 
+use `ESC` key to hide OSC/Buttons (if it doesn't autohide)
+
+
 By default, keyboard navigation is enabled (like Plex HTPC) to disable it, open PlexOSC.lua in a text editor, scroll to line 57 and 
 
 change `keyboardnavigation = true` to `keyboardnavigation = false`
-
-use `ESC` key to hide OSC (if it doesn't autohide)
 
 # Installation:
 
