@@ -27,10 +27,6 @@ border = no # Optional, but recommended
 ```
 `Material-Design-Iconic-Font.ttf` can also be downloaded from [here](https://zavoloklom.github.io/material-design-iconic-font/).
 
-# How to config
-
-edit osc.conf in "\~\~/script-opts/" folder, however many options are changed, so refer to the user_opts variable in the script file for details.
-
 # Thumbnails
 
 To enable thumbnails in timeline, install [thumbfast](https://github.com/po5/thumbfast). No other step necessary.
