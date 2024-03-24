@@ -3,7 +3,7 @@
 ![img](https://i.ibb.co/SXhRPsc/CEm0-Pvyh-o.png)
 ![img](https://images2.imgbox.com/51/4f/ypptKnKC_o.png)
 
-# Importanti Info:
+# Important Info:
 
 By default, keyboard navigation is enabled (like Plex HTPC) to disable it, open PlexOSC.lua in a text editor, scroll to line 57 and 
 
