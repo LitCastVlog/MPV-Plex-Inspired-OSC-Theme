@@ -1,6 +1,6 @@
 # Plex HTPC-Inspired theme for MPV
 
-![img](https://i.ibb.co/SXhRPsc/CEm0-Pvyh-o.png)
+![image](https://raw.githubusercontent.com/LitCastVlog/MPV-Plex-Inspired-OSC-Theme/main/screnshot.png)
 
 # Important Info:
 
